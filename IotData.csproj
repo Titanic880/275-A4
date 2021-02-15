@@ -47,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DataSchema.cs" />
+    <Compile Include="Components\DBChecker.cs" />
+    <Compile Include="Components\DBFileManip.cs" />
+    <Compile Include="Components\LocalFileManip.cs" />
     <Compile Include="DataColl.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
