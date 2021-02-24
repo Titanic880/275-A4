@@ -19,75 +19,77 @@ namespace IotData.Components
             Water,
             Gas
         }
-        public DataSchema(string Name, DataType dt, int Measure1, int MeasureValue1, int Measure2, int MeasureValue2)
-        {
 
-        }
-        static Random rand = new Random();
-        private string DeviceName = "";
-        private string DeviceType = "";
-        private string UOM1 = "";
-        private string UOM2 = "";
-        private decimal UOM1Value = 0;
-        private decimal UOM2Value = 0;
-        private DateTime TimeStamp;
+        static readonly Random rand = new Random();
+        
+        readonly string DeviceName = null;
+        readonly DataType DeviceType;
+        string UOM1 = null;
+        string UOM2 = null;
 
-        public override string ToString()
+        decimal UOM1Value = 0;
+        decimal UOM2Value = 0;
+        DateTime TimeStamp;
+        /// <summary>
+        /// Returns a string of the Datafile
+        /// </summary>
+        /// <returns></returns>
+        public string GetInformation()
         {
-            return DeviceName + "," + DeviceType + "," + TimeStamp.ToString("yyyyMMdd HH:mm:ss") + "," + UOM1 + "," + UOM1Value + "," + UOM2 + "," + UOM2Value + Environment.NewLine;
+            return $"{DeviceName},{DeviceType},{TimeStamp:yyyyMMdd HH:mm:ss},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
         }
-        public DataSchema(string dName, string dType)
-        {
-            this.DeviceName = dName;
-            this.DeviceType = dType;
 
-            if (dType == "GPS")
+        public DataSchema(string dName, DataType Type)
+        {
+            DeviceName = dName;
+            DeviceType = Type;
+
+            switch (Type)
             {
-                GenerateGPSData();
-            }
-            else if (dType == "H2O")
-            {
-                GenerateWaterData();
-            }
-            else if (dType == "Gas")
-            {
-                GenerateGasData();
-            }
-            else if (dType == "ELECTRIC")
-            {
-                GenerateElectricData();
+                case DataType.GPS:
+                    GenerateGPSData();
+                    break;
+                case DataType.Electric:
+                    GenerateElectricData();
+                    break;
+                case DataType.Water:
+                    GenerateWaterData();
+                    break;
+                case DataType.Gas:
+                    GenerateGasData();
+                    break;
             }
         }
-        public void GenerateElectricData()
+
+        private void GenerateElectricData()
         {
             UOM1 = "kWH";
             UOM2 = "kVA";
-            UOM1Value = Decimal.Parse(rand.Next(1, 13) + "." + rand.Next(0, 100000));
-            UOM2Value = Decimal.Parse(rand.Next(1, 4) + "." + rand.Next(0, 100000));
+            GenerateData(13,4, 100000,1,1);
         }
-        public void GenerateGasData()
+        private void GenerateGasData()
         {
             UOM1 = "CF";
             UOM2 = "PSI";
-
-            UOM1Value = Decimal.Parse(rand.Next(0, 1) + "." + rand.Next(0, 100000));
-            UOM2Value = Decimal.Parse("1." + rand.Next(0, 100000));
-
+            GenerateData(1, 1, 100000);            
         }
-        public void GenerateWaterData()
+        private void GenerateWaterData()
         {
             UOM1 = "CM";
             UOM2 = "TEMPCelsius";
-            UOM1Value = Decimal.Parse(rand.Next(0, 1) + "." + rand.Next(0, 100000));
-            UOM2Value = Decimal.Parse(rand.Next(0, 35) + "." + rand.Next(0, 100000));
+            GenerateData(1, 1, 100000);
         }
-        public void GenerateGPSData()
+        private void GenerateGPSData()
         {
             UOM1 = "Latitude";
             UOM2 = "Longitude";
+            GenerateData(52, -109, 100000000 ,19, -111);
+        }
+        internal void GenerateData( int UOMax1, int UOMax2, int upperLimit = 100000, int UOMin1 = 0, int UOMin2 = 0)
+        {
             TimeStamp = DateTime.Now;
-            UOM1Value = Decimal.Parse(rand.Next(19, 52).ToString() + "." + rand.Next(0, 100000000).ToString());
-            UOM2Value = Decimal.Parse(rand.Next(-111, -109).ToString() + "." + rand.Next(0, 100000000).ToString());
+            UOM1Value = decimal.Parse(rand.Next(UOMin1, UOMax1) + "." + rand.Next(0, upperLimit));
+            UOM2Value = decimal.Parse(rand.Next(UOMin2, UOMax2) + "." + rand.Next(0, upperLimit));
         }
     }
 }

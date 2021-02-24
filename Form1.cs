@@ -24,7 +24,7 @@ namespace IotData
         public Form1()
         {
             InitializeComponent();
-            Components.LocalFileManip.FileCheck();
+            //Components.LocalFileManip.FileCheck();
 
             this.MaximizeBox = false;
         }
