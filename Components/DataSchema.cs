@@ -1,29 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IotData.Components
 {
     ///The data Schema for generating the Data used
     public class DataSchema
     {
-        /// <summary>
-        /// The Type of device
-        /// </summary>
-        public enum DataType
-        {
-            GPS,
-            Electric,
-            Water,
-            Gas
-        }
-
-        static readonly Random rand = new Random();
+        
 
         readonly string DeviceName = null;
-        readonly DataType DeviceType;
+        readonly DataInfo.DataType DeviceType;
         string UOM1 = null;
         string UOM2 = null;
 
@@ -39,23 +24,23 @@ namespace IotData.Components
             return $"{DeviceName},{DeviceType},{TimeStamp:yyyyMMdd HH:mm:ss},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
         }
 
-        public DataSchema(string dName, DataType Type)
+        public DataSchema(string dName, DataInfo.DataType Type)
         {
             DeviceName = dName;
             DeviceType = Type;
 
             switch (Type)
             {
-                case DataType.GPS:
+                case DataInfo.DataType.GPS:
                     GenerateGPSData();
                     break;
-                case DataType.Electric:
+                case DataInfo.DataType.Electric:
                     GenerateElectricData();
                     break;
-                case DataType.Water:
+                case DataInfo.DataType.Water:
                     GenerateWaterData();
                     break;
-                case DataType.Gas:
+                case DataInfo.DataType.Gas:
                     GenerateGasData();
                     break;
             }
@@ -88,8 +73,8 @@ namespace IotData.Components
         internal void GenerateData( int UOMax1, int UOMax2, int upperLimit = 100000, int UOMin1 = 0, int UOMin2 = 0)
         {
             TimeStamp = DateTime.Now;
-            UOM1Value = decimal.Parse(rand.Next(UOMin1, UOMax1) + "." + rand.Next(0, upperLimit));
-            UOM2Value = decimal.Parse(rand.Next(UOMin2, UOMax2) + "." + rand.Next(0, upperLimit));
+            UOM1Value = decimal.Parse(DataInfo.rand.Next(UOMin1, UOMax1) + "." + DataInfo.rand.Next(0, upperLimit));
+            UOM2Value = decimal.Parse(DataInfo.rand.Next(UOMin2, UOMax2) + "." + DataInfo.rand.Next(0, upperLimit));
         }
     }
 }

@@ -13,5 +13,18 @@ namespace IotData.Components
         public readonly static int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
 
         public static readonly int CPUCORES = Environment.ProcessorCount - 2;
+
+        /// <summary>
+        /// The Type of device
+        /// </summary>
+        public enum DataType
+        {
+            GPS,
+            Electric,
+            Water,
+            Gas
+        }
+
+        public static readonly Random rand = new Random();
     }
 }
