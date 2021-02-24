@@ -54,6 +54,7 @@ namespace IotData.Components
 
         #region Static
         public static string LocalFile { get; private set; }
+        public static string LocalDir { get; private set; } = "Local";
 
         public static void WriteToFile(string Data)
         {
@@ -79,20 +80,40 @@ namespace IotData.Components
             LocalFile = path;
         }
 
+        public static void SetLocalDirectory(string Dir)
+        {
+            LocalDir = Dir;
+        }
+
         /// <summary>
         /// Checks for the DataFile and generates if not found
         /// </summary>
         public static string FileCheck()
         {
             string ret = null;
-            if (!Directory.Exists(LocalFile))
+            if (!Directory.Exists(LocalDir))
             {
-                Directory.CreateDirectory(LocalFile);
+                Directory.CreateDirectory(LocalDir);
                 File.Create(LocalFile).Close();
                 ret = "Data file was not found, new one created";
             }
             else if (!File.Exists(LocalFile))
                 File.Create(LocalFile).Close();
+
+
+            return ret;
+        }
+        public static string FileCheck(string FilePath)
+        {
+            string ret = null;
+            if (!Directory.Exists(LocalDir))
+            {
+                Directory.CreateDirectory(LocalDir);
+                File.Create(FilePath).Close();
+                ret = "Data file was not found, new one created";
+            }
+            else if (!File.Exists(FilePath))
+                File.Create(FilePath).Close();
 
 
             return ret;
