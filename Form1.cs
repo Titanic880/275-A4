@@ -30,29 +30,14 @@ namespace IotData
         public Form1()
         {
             InitializeComponent();
-            FileCheck();
+            Components.LocalFileManip.FileCheck();
 
             wrk.WorkerSupportsCancellation = true;
             wrk.DoWork += Wrk_DoWork;
             wrk.RunWorkerCompleted += Wrk_RunWorkerCompleted;
         }
 
-        /// <summary>
-        /// Checks for the DataFile and generates if not found
-        /// </summary>
-        private void FileCheck()
-        {
-            if (!Directory.Exists(Datapath))
-            {
-                Directory.CreateDirectory(Datapath);
-                File.Create(DataFile).Close();
-                MessageBox.Show("Data file was not found, new one created");
-            }
-            else if (!File.Exists(DataFile))
-                File.Create(DataFile).Close();
-            else
-                MessageBox.Show("DataFile was Found");
-        }
+
 
         #region Worker
         private void Wrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

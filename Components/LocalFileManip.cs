@@ -78,6 +78,25 @@ namespace IotData.Components
         {
             LocalFile = path;
         }
+
+        /// <summary>
+        /// Checks for the DataFile and generates if not found
+        /// </summary>
+        public static string FileCheck()
+        {
+            string ret = null;
+            if (!Directory.Exists(LocalFile))
+            {
+                Directory.CreateDirectory(LocalFile);
+                File.Create(LocalFile).Close();
+                ret = "Data file was not found, new one created";
+            }
+            else if (!File.Exists(LocalFile))
+                File.Create(LocalFile).Close();
+
+
+            return ret;
+        }
         #endregion Static
     }
 }
