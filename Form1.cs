@@ -35,8 +35,8 @@ namespace IotData
             wrk.WorkerSupportsCancellation = true;
             wrk.DoWork += Wrk_DoWork;
             wrk.RunWorkerCompleted += Wrk_RunWorkerCompleted;
-
         }
+
         /// <summary>
         /// Checks for the DataFile and generates if not found
         /// </summary>
@@ -68,8 +68,5 @@ namespace IotData
             }
         }
         #endregion Worker
-
-
-
     }
 }
