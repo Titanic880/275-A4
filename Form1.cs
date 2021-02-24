@@ -20,38 +20,13 @@ namespace IotData
         readonly string DataFile = ConfigurationManager.AppSettings.Get("filePath");
         readonly int DeviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
         readonly int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
-        
-        BackgroundWorker wrk = new BackgroundWorker();
-
-        ConcurrentQueue<DataColl> Q = new ConcurrentQueue<DataColl>();
-
-        bool cancel = false;
 
         public Form1()
         {
             InitializeComponent();
             Components.LocalFileManip.FileCheck();
 
-            wrk.WorkerSupportsCancellation = true;
-            wrk.DoWork += Wrk_DoWork;
-            wrk.RunWorkerCompleted += Wrk_RunWorkerCompleted;
+            this.MaximizeBox = false;
         }
-
-
-
-        #region Worker
-        private void Wrk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Wrk_DoWork(object sender, DoWorkEventArgs e)
-        {
-            for(int i = 0; i <= DeviceCount; i++)
-            {
-
-            }
-        }
-        #endregion Worker
     }
 }
