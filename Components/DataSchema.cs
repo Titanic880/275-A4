@@ -21,7 +21,7 @@ namespace IotData.Components
         }
 
         static readonly Random rand = new Random();
-        
+
         readonly string DeviceName = null;
         readonly DataType DeviceType;
         string UOM1 = null;
