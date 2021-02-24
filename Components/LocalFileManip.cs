@@ -47,7 +47,7 @@ namespace IotData.Components
         {
             if (!wkr.CancellationPending)
             {
-
+                throw new NotImplementedException();
             }
             WriteTotal++;
         }
@@ -100,7 +100,6 @@ namespace IotData.Components
             else if (!File.Exists(LocalFile))
                 File.Create(LocalFile).Close();
 
-
             return ret;
         }
         public static string FileCheck(string FilePath)
@@ -114,7 +113,6 @@ namespace IotData.Components
             }
             else if (!File.Exists(FilePath))
                 File.Create(FilePath).Close();
-
 
             return ret;
         }
