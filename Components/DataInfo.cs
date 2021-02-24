@@ -5,21 +5,13 @@ namespace IotData.Components
 {/// <summary>
  /// Handles and stores environment variables
  /// </summary>
-    public class DataInfo
+    public static class DataInfo
     {
-        public readonly string Datapath;
-        public readonly string DataFile;
-        public readonly int DeviceCount;
-        public readonly int dataDelay;
+        public readonly static string Datapath = ConfigurationManager.AppSettings.Get("fileDirectory");
+        public readonly static string DataFile = ConfigurationManager.AppSettings.Get("filePath");
+        public readonly static int DeviceCount= int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
+        public readonly static int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
 
         public static readonly int CPUCORES = Environment.ProcessorCount - 2;
-
-        public DataInfo()
-        {
-            Datapath = ConfigurationManager.AppSettings.Get("fileDirectory");
-            DataFile = ConfigurationManager.AppSettings.Get("filePath");
-            DeviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
-            dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
-        }
     }
 }
