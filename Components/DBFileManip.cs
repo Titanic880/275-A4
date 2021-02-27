@@ -11,6 +11,18 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
+        //background worker shenanagins? i think? kek
+
+        public DBFileManip()
+        {
+
+        }
+
+        public void startfileworker()
+        {
+            //bgw.RunWorkerAsync();
+        }
+
 
     }
 }
