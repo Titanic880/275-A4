@@ -12,6 +12,7 @@ namespace IotData.Components
     public class DBFileManip
     {
         //background worker shenanagins? i think? kek
+        Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
 
         public DBFileManip()
         {

@@ -22,7 +22,6 @@ namespace IotData.Components
         public string GetInformation()
         {
             return $"{DeviceName},{DeviceType},{TimeStamp:yyyyMMdd HH:mm:ss},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
-            return DeviceName + "," + DeviceType + "," + TimeStamp.ToString("yyyyMMdd HH:mm:ss") + "," + UOM1 + "," + UOM1Value + "," + UOM2 + "," + UOM2Value + Environment.NewLine;
         }
 
         public DataSchema(string dName, DataInfo.DataType Type)
