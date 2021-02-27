@@ -28,5 +28,60 @@ namespace IotData.Components
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Tests the Sql Connection
+        /// </summary>
+        internal static bool Test_Conn()
+        {
+            string Table_Loggging = "Create Table Test_conn (" +
+                 "ID int not null Primary key Identity(0,1)," +
+                 "LogLevel int not null," +
+                 "Error_Desc varchar(50)," +
+                 "Time_Of_Error DateTime not null" +
+                 ");";
+            string check_tbl = "Select * from Test_conn";
+
+            bool test = true;
+
+            try
+            {
+                sql.Open();
+
+                //Tests to see if the table exists, if it doesn't the runs the Table create
+                try
+                {
+                    SqlCommand comm = new SqlCommand(check_tbl, sql);
+                    comm.ExecuteScalar();
+                }
+                catch
+                {
+                    test = false;
+                }
+                if (!test)
+                {
+                    SqlCommand cmd = new SqlCommand(Table_Loggging, sql);
+                    cmd.ExecuteScalar();
+                }
+                SqlCommand drop = new SqlCommand("Drop Table Test_conn;", sql);
+                drop.ExecuteScalar();
+                test = true;
+            }
+            catch
+            {
+                test = false;
+            }
+            finally
+            {
+                if (sql.State != ConnectionState.Closed)
+                    sql.Close();
+            }
+
+            return test;
+        }
+
+
+
+
     }
 }

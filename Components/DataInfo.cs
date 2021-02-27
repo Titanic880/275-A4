@@ -26,5 +26,15 @@ namespace IotData.Components
         }
 
         public static readonly Random rand = new Random();
+
+        //make number to equal how many threads, when a process is finished it either incruiments or decriments
+        //2 for timeer
+        //2 for comp
+
+        //generic info
+        // were using this cus went talk to the form nicely
+
+
+
     }
 }

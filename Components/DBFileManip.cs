@@ -23,6 +23,6 @@ namespace IotData.Components
             //bgw.RunWorkerAsync();
         }
 
-
+        //talking to and writing to the database
     }
 }
