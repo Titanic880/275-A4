@@ -50,12 +50,16 @@ namespace IotData.Components
                 //Checks that the database is offline
                 if(!DBChecker.Connected())
                 {
-
+                    //Writes a dataSchema to the file if the database is not found
+                    using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
+                        sw.WriteLine(DataInfo.InitialQueue.Dequeue().GetInformation());
                 }
+                //if the db is found then it shifts one line from the datafile into the db queue 
+                //(might change the size of the move depending on effeciency)
                 else
                 {
-                    File.ReadLines(LocalFileName);
-                    DataInfo.ToDatabaseQ.Enqueue();
+                    using (StreamReader sr = new StreamReader(LocalDir+LocalFileName))
+                        DataInfo.ToDatabaseQ.Enqueue(new DataSchema(sr.ReadLine()));
                 }
             WriteTotal++;
             }
@@ -69,19 +73,6 @@ namespace IotData.Components
         {
             using (StreamWriter sw = File.AppendText(LocalFileName))
                 sw.WriteLine(Data);
-        }
-
-        public static string ReadFromFile(string Path)
-        {
-            string ret = new string;
-            using (StreamReader sr = new StreamReader(Path))
-            {
-                for (int i = 0; i < Lines; i++)
-                {
-                    ret[i] = sr.ReadLine();
-                }
-            }
-            return ret;
         }
 
         public static void SetLocalFile(string path)
