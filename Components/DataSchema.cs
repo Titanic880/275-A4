@@ -46,6 +46,35 @@ namespace IotData.Components
             }
         }
 
+        /// <summary>
+        /// Reloads a schema from a string input
+        /// </summary>
+        /// <param name="Reload"></param>
+        public DataSchema(string Reload)
+        {
+            string[] vals = Reload.Split(',');
+            DeviceName = vals[0];
+            switch (vals[1])
+            {
+                case "GPS":
+                    DeviceType = DataInfo.DataType.GPS;
+                    break;
+                case "Electric":
+                    DeviceType = DataInfo.DataType.Electric;
+                    break;
+                case "Water":
+                    DeviceType = DataInfo.DataType.Water;
+                    break;
+                case "Gas":
+                    DeviceType = DataInfo.DataType.Gas;
+                    break;
+            }
+            TimeStamp = Convert.ToDateTime(vals[2]);
+            UOM1 = vals[3];
+            UOM1Value = Convert.ToDecimal(vals[4]);
+            UOM2 = vals[5];
+            UOM2Value = Convert.ToDecimal(vals[6]);
+        }
         private void GenerateElectricData()
         {
             UOM1 = "kWH";

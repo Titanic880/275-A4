@@ -27,8 +27,8 @@ namespace IotData.Components
         {
             for(int i = int.MaxValue; i > 0; i-=2)
             {
-                DataInfo.ToDBQ.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand.Next(4)));
-                DataInfo.ToDBQ.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand2.Next(4)));
+                DataInfo.InitialQueue.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand.Next(4)));
+                DataInfo.InitialQueue.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand2.Next(4)));
             }
         }
         private void Wkr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

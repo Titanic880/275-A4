@@ -14,7 +14,6 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
-        
 
         private SqlConnection conn;
 

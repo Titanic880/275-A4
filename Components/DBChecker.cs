@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IotData.Components
 {
@@ -24,9 +18,9 @@ namespace IotData.Components
         /// <returns></returns>
         public static int SetDatabaseType()
         {
-            if (Test_Conn(connections[0]))
+            if (Test_Conn(DataInfo.connections[0]))
                 return ConnectionType = 0;
-            else if (Test_Conn(connections[1]))
+            else if (Test_Conn(DataInfo.connections[1]))
                 return ConnectionType = 1;
             else
                 return ConnectionType = -1;
@@ -39,7 +33,7 @@ namespace IotData.Components
         public static bool Connected()
         {
             if (ConnectionType != -1)
-                return Test_Conn(connections[ConnectionType]);
+                return Test_Conn(DataInfo.connections[ConnectionType]);
             else
                 return false;
         }

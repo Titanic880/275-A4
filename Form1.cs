@@ -16,31 +16,15 @@ namespace IotData
 {
     public partial class Form1 : Form
     {
-
         bool cancel = false;
-
-        //put all vals from the config file
-        readonly string filePath = ConfigurationManager.AppSettings.Get("filePath");
-        readonly string fileDirectory = ConfigurationManager.AppSettings.Get("fileDirectory");
-        readonly int deviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
-        readonly int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
-
 
         public Form1()
         {
             InitializeComponent();
+            LocalFileManip.FileCheck();
             
-           LocalFileManip.FileCheck();
 
-            this.MaximizeBox = false;
-
-
-            if (Directory.Exists(fileDirectory))
-            {
-                Directory.CreateDirectory(fileDirectory);
-            }
-
-            
+            this.MaximizeBox = false;            
         }
 
         private void button1_Click(object sender, EventArgs e)

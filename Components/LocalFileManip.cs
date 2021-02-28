@@ -47,27 +47,33 @@ namespace IotData.Components
         {
             if (!wkr.CancellationPending)
             {
+                //Checks that the database is offline
                 if(!DBChecker.Connected())
                 {
 
+                }
+                else
+                {
+                    File.ReadLines(LocalFileName);
+                    DataInfo.ToDatabaseQ.Enqueue();
                 }
             WriteTotal++;
             }
         }
 
         #region Static
-        public static string LocalFile { get; private set; } = "stor.csv";
+        public static string LocalFileName { get; private set; } = "stor.csv";
         public static string LocalDir { get; private set; } = "Local";
 
         public static void WriteToFile(string Data)
         {
-            using (StreamWriter sw = File.AppendText(LocalFile))
+            using (StreamWriter sw = File.AppendText(LocalFileName))
                 sw.WriteLine(Data);
         }
 
-        public static string[] ReadFromFile(string Path, int Lines)
+        public static string ReadFromFile(string Path)
         {
-            string[] ret = new string[Lines];
+            string ret = new string;
             using (StreamReader sr = new StreamReader(Path))
             {
                 for (int i = 0; i < Lines; i++)
@@ -80,9 +86,7 @@ namespace IotData.Components
 
         public static void SetLocalFile(string path)
         {
-            LocalFile = path;
-
-            //LocalFile = "hi";
+            LocalFileName = path;
         }
 
         public static void SetLocalDirectory(string Dir)
@@ -95,17 +99,7 @@ namespace IotData.Components
         /// </summary>
         public static string FileCheck()
         {
-            string ret = null;
-            if (!Directory.Exists(LocalDir))
-            {
-                Directory.CreateDirectory(LocalDir);
-                File.Create(LocalFile).Close();
-                ret = "Data file was not found, new one created";
-            }
-           // else if (!File.Exists(LocalFile))
-              //  File.Create(LocalFile).Close();
-
-            return ret;
+            return FileCheck(LocalDir+LocalFileName);
         }
         public static string FileCheck(string FilePath)
         {

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DataGenerator.cs" />
     <Compile Include="Components\DataInfo.cs" />
     <Compile Include="Components\DataSchema.cs" />
     <Compile Include="Components\DBChecker.cs" />

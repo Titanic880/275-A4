@@ -38,10 +38,13 @@ namespace IotData.Components
         public static readonly int ThreadsForWorkers = Environment.ProcessorCount - 4;
 
         /// <summary>
-        /// The Main queue that everything will revolve around
+        /// The queue that is written to from the generator
         /// </summary>
-        public static Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
-
+        public static Queue<DataSchema> InitialQueue = new Queue<DataSchema>();
+        /// <summary>
+        /// if the database is not found then the schema is loaded into this queue
+        /// </summary>
+        public static Queue<DataSchema> ToDatabaseQ = new Queue<DataSchema>();
 
         /// <summary>
         /// The Type of device
