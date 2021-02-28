@@ -77,7 +77,6 @@ namespace IotData.Components
             try
             {
                 connection.Open();
-
                 //Tests to see if the table exists, if it doesn't the runs the Table create
                 try
                 {
@@ -108,7 +107,6 @@ namespace IotData.Components
                 if (connection.State != ConnectionState.Closed)
                     connection.Close();
             }
-
             return test;
         }
 
