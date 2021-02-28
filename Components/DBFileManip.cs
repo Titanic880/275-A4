@@ -14,11 +14,9 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
-        Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
+        public Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
 
-        string connectionString = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
-
-        SqlConnection conn;
+        private SqlConnection conn;
 
 
         public DBFileManip()
@@ -39,7 +37,7 @@ namespace IotData.Components
         public DataTable SelectAllFromDatabase(string TableName = "Data")
         {
             DataTable ret = new DataTable();
-            SqlConnection conn = new SqlConnection(connectionString);
+            SqlConnection conn = new SqlConnection(DataInfo.connections[0]);
             SqlCommand cmd = new SqlCommand($"Select * From {TableName}", conn);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             adapter.Fill(ret);

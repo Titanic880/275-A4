@@ -10,7 +10,7 @@ namespace IotData.Components
 {
     public class LocalFileManip
     {
-        BackgroundWorker wkr = new BackgroundWorker();
+        readonly BackgroundWorker wkr = new BackgroundWorker();
         public bool Completed { get; private set; } = false;
         public uint WriteTotal { get; private set; } = 0;
         public LocalFileManip()
@@ -47,13 +47,16 @@ namespace IotData.Components
         {
             if (!wkr.CancellationPending)
             {
-                throw new NotImplementedException();
-            }
+                if(!DBChecker.Connected())
+                {
+
+                }
             WriteTotal++;
+            }
         }
 
         #region Static
-        public static string LocalFile { get; private set; }
+        public static string LocalFile { get; private set; } = "stor.csv";
         public static string LocalDir { get; private set; } = "Local";
 
         public static void WriteToFile(string Data)

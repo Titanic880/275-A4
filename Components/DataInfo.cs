@@ -18,11 +18,19 @@ namespace IotData.Components
         /// <summary>
         /// The amount of Devices
         /// </summary>
-        public readonly static int DeviceCount= int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
+        public readonly static int DeviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
         /// <summary>
         /// The delay of data
         /// </summary>
         public readonly static int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
+        /// <summary>
+        /// The different types of connection
+        /// </summary>
+        public readonly static string[] connections =
+        {
+            ConfigurationManager.ConnectionStrings["labString"].ConnectionString,
+            ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString
+        };
 
         /// <summary>
         /// The number of threads avaliable for background workers

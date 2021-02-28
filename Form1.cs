@@ -20,10 +20,10 @@ namespace IotData
         bool cancel = false;
 
         //put all vals from the config file
-        string filePath = ConfigurationManager.AppSettings.Get("filePath");
-        string fileDirectory = ConfigurationManager.AppSettings.Get("fileDirectory");
-        int deviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
-        int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
+        readonly string filePath = ConfigurationManager.AppSettings.Get("filePath");
+        readonly string fileDirectory = ConfigurationManager.AppSettings.Get("fileDirectory");
+        readonly int deviceCount = int.Parse(ConfigurationManager.AppSettings.Get("deviceCount"));
+        readonly int dataDelay = int.Parse(ConfigurationManager.AppSettings.Get("dataDelayMillis"));
 
 
         public Form1()
@@ -86,11 +86,6 @@ namespace IotData
             // and put in your connection string in app config
             DBFileManip FM = new DBFileManip();
             dataGridView1.DataSource = FM.SelectAllFromDatabase();
-            
-
-            DBChecker check = new DBChecker();
-    
-
         }
     }
 }

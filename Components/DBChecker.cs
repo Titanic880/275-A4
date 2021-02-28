@@ -13,9 +13,8 @@ namespace IotData.Components
     /// Used to Check if the database exists
     /// </summary>
     public static class DBChecker
-    {
-        private static string[] connections { get; } = { ConfigurationManager.ConnectionStrings["labString"].ConnectionString, ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString };
-        private static SqlConnection conn;
+    { 
+        private readonly static SqlConnection conn;
         //0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
         public static int ConnectionType { get; private set; } = -1;
 
