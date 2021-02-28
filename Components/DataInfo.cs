@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace IotData.Components
@@ -31,11 +32,16 @@ namespace IotData.Components
             ConfigurationManager.ConnectionStrings["labString"].ConnectionString,
             ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString
         };
-
         /// <summary>
         /// The number of threads avaliable for background workers
         /// </summary>
         public static readonly int ThreadsForWorkers = Environment.ProcessorCount - 4;
+
+        /// <summary>
+        /// The Main queue that everything will revolve around
+        /// </summary>
+        public static Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
+
 
         /// <summary>
         /// The Type of device

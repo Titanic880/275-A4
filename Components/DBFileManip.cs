@@ -14,7 +14,7 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
-        public Queue<DataSchema> ToDBQ = new Queue<DataSchema>();
+        
 
         private SqlConnection conn;
 
