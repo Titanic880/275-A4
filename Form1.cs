@@ -39,6 +39,8 @@ namespace IotData
             {
                 Directory.CreateDirectory(fileDirectory);
             }
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,6 +75,11 @@ namespace IotData
         }
 
         private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
         {
 
         }

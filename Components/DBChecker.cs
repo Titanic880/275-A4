@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +19,11 @@ namespace IotData.Components
         
         public DBChecker()
         {
-
+            //SqlConnection conn = new SqlConnection(connectionString);
         }
 
+        string connectionString = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
+        SqlConnection conn;
 
         /// <summary>
         /// Checks what form of the database to use
@@ -32,8 +37,13 @@ namespace IotData.Components
         /// <summary>
         /// Tests the Sql Connection
         /// </summary>
-        internal static bool Test_Conn()
+        /// 
+
+
+        // mitch i changed this from static to not static cusits thowing errors with it static
+        internal  bool Test_Conn()
         {
+            conn = new SqlConnection(connectionString);
             string Table_Loggging = "Create Table Test_conn (" +
                  "ID int not null Primary key Identity(0,1)," +
                  "LogLevel int not null," +
@@ -46,12 +56,12 @@ namespace IotData.Components
 
             try
             {
-                sql.Open();
+                conn.Open();
 
                 //Tests to see if the table exists, if it doesn't the runs the Table create
                 try
                 {
-                    SqlCommand comm = new SqlCommand(check_tbl, sql);
+                    SqlCommand comm = new SqlCommand(check_tbl, conn);
                     comm.ExecuteScalar();
                 }
                 catch
@@ -60,10 +70,10 @@ namespace IotData.Components
                 }
                 if (!test)
                 {
-                    SqlCommand cmd = new SqlCommand(Table_Loggging, sql);
+                    SqlCommand cmd = new SqlCommand(Table_Loggging, conn);
                     cmd.ExecuteScalar();
                 }
-                SqlCommand drop = new SqlCommand("Drop Table Test_conn;", sql);
+                SqlCommand drop = new SqlCommand("Drop Table Test_conn;", conn);
                 drop.ExecuteScalar();
                 test = true;
             }
@@ -73,8 +83,8 @@ namespace IotData.Components
             }
             finally
             {
-                if (sql.State != ConnectionState.Closed)
-                    sql.Close();
+                if (conn.State != ConnectionState.Closed)
+                    conn.Close();
             }
 
             return test;

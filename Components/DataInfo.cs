@@ -32,7 +32,7 @@ namespace IotData.Components
         //2 for comp
 
         //generic info
-        // were using this cus went talk to the form nicely
+        // were using this cus wen cant talk to the form nicely
 
 
 
