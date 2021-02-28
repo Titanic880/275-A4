@@ -59,7 +59,17 @@ namespace IotData.Components
                 else
                 {
                     using (StreamReader sr = new StreamReader(LocalDir + LocalFileName))
-                        DataInfo.ToDatabaseQ.Enqueue(new DataSchema(sr.ReadLine()));
+                    {
+                        string tmp = sr.ReadLine();
+                        if(tmp == null)
+                        {   //If the file is empty it will push a Schema from the inital to the Db Queue
+                            DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());
+                        }
+                        else
+                        {   //Otherwise it will pull from the file
+                            DataInfo.ToDatabaseQ.Enqueue(new DataSchema(tmp));
+                        }
+                    }
                 }
                 WriteTotal++;
             }
