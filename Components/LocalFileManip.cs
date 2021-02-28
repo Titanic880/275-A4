@@ -45,10 +45,10 @@ namespace IotData.Components
 
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (!wkr.CancellationPending)
+            while (!wkr.CancellationPending)
             {
                 //Checks that the database is offline
-                if(!DBChecker.Connected())
+                if (!DBChecker.Connected())
                 {
                     //Writes a dataSchema to the file if the database is not found
                     using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
@@ -58,10 +58,10 @@ namespace IotData.Components
                 //(might change the size of the move depending on effeciency)
                 else
                 {
-                    using (StreamReader sr = new StreamReader(LocalDir+LocalFileName))
+                    using (StreamReader sr = new StreamReader(LocalDir + LocalFileName))
                         DataInfo.ToDatabaseQ.Enqueue(new DataSchema(sr.ReadLine()));
                 }
-            WriteTotal++;
+                WriteTotal++;
             }
         }
 
