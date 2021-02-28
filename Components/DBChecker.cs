@@ -26,7 +26,7 @@ namespace IotData.Components
         private static string DockString = ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString;
         SqlConnection conn;
         //0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
-        static int ConnectionType = 0;
+        public static int ConnectionType = 0;
 
 
         /// <summary>
@@ -63,6 +63,7 @@ namespace IotData.Components
             //Checks for the connection string
             if (connection.ConnectionString == null)
                 return false;
+
             string Table_Loggging = "Create Table Test_conn (" +
                  "ID int not null Primary key Identity(0,1)," +
                  "LogLevel int not null," +
@@ -81,7 +82,7 @@ namespace IotData.Components
                 try
                 {
                     SqlCommand comm = new SqlCommand(check_tbl, connection);
-                    comm.ExecuteScalar();
+                    comm.ExecuteNonQuery();
                 }
                 catch
                 {
@@ -90,10 +91,10 @@ namespace IotData.Components
                 if (!test)
                 {
                     SqlCommand cmd = new SqlCommand(Table_Loggging, connection);
-                    cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
                 }
                 SqlCommand drop = new SqlCommand("Drop Table Test_conn;", connection);
-                drop.ExecuteScalar();
+                drop.ExecuteNonQuery();
                 test = true;
             }
             catch
