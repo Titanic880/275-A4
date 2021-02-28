@@ -57,7 +57,7 @@ namespace IotData.Components
         /// Tests the Sql Connection
         /// </summary>
         /// 
-        // mitch i changed this from static to not static cusits thowing errors with it static
+        // mitch i changed this from static to not static cusits thowing errors with it static  //mitch fixed this!
         internal static bool Test_Conn(SqlConnection connection)
         {
             //Checks for the connection string
@@ -92,6 +92,8 @@ namespace IotData.Components
                 {
                     SqlCommand cmd = new SqlCommand(Table_Loggging, connection);
                     cmd.ExecuteNonQuery();
+
+                    
                 }
                 SqlCommand drop = new SqlCommand("Drop Table Test_conn;", connection);
                 drop.ExecuteNonQuery();

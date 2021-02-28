@@ -78,6 +78,8 @@ namespace IotData.Components
         public static void SetLocalFile(string path)
         {
             LocalFile = path;
+
+            //LocalFile = "hi";
         }
 
         public static void SetLocalDirectory(string Dir)
@@ -97,8 +99,8 @@ namespace IotData.Components
                 File.Create(LocalFile).Close();
                 ret = "Data file was not found, new one created";
             }
-            else if (!File.Exists(LocalFile))
-                File.Create(LocalFile).Close();
+           // else if (!File.Exists(LocalFile))
+              //  File.Create(LocalFile).Close();
 
             return ret;
         }

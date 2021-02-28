@@ -82,6 +82,15 @@ namespace IotData
         private void button5_Click(object sender, EventArgs e)
         {
 
+            //mitch for this to work on your end, you need to create the database on your end
+            // and put in your connection string in app config
+            DBFileManip FM = new DBFileManip();
+            dataGridView1.DataSource = FM.SelectAllFromDatabase();
+            
+
+            DBChecker check = new DBChecker();
+    
+
         }
     }
 }
