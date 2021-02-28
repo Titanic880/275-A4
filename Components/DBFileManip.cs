@@ -23,7 +23,8 @@ namespace IotData.Components
 
         public DBFileManip()
         {
-            DBChecker.CheckDataBaseType();
+            if(DBChecker.ConnectionType == -1)
+                DBChecker.SetDatabaseType();
         }
 
         public void startfileworker()

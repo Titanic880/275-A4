@@ -14,27 +14,36 @@ namespace IotData.Components
     /// </summary>
     public static class DBChecker
     {
-        private static string LabString { get; } = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
-        private static string DockString { get; } = ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString;
+        private static string[] connections { get; } = { ConfigurationManager.ConnectionStrings["labString"].ConnectionString, ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString };
         private static SqlConnection conn;
         //0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
-        public static int ConnectionType { get; private set; } = 0;
-
+        public static int ConnectionType { get; private set; } = -1;
 
         /// <summary>
         /// Checks what form of the database to use
         /// </summary>
         /// <returns></returns>
-        public static int CheckDataBaseType()
+        public static int SetDatabaseType()
         {
-            if (Test_Conn(LabString))
-                return ConnectionType = 1;
-            else if (Test_Conn(DockString))
-                return ConnectionType = 2;
-            else
+            if (Test_Conn(connections[0]))
                 return ConnectionType = 0;
+            else if (Test_Conn(connections[1]))
+                return ConnectionType = 1;
+            else
+                return ConnectionType = -1;
         }
 
+        /// <summary>
+        /// Returns true if database exists
+        /// </summary>
+        /// <returns></returns>
+        public static bool Connected()
+        {
+            if (ConnectionType != -1)
+                return Test_Conn(connections[ConnectionType]);
+            else
+                return false;
+        }
         /// <summary>
         /// Tests the Sql Connection
         /// </summary>
