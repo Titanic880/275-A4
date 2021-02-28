@@ -26,6 +26,8 @@ namespace IotData.Components
                 return ConnectionType = -1;
         }
 
+ 
+
         /// <summary>
         /// Returns true if database exists
         /// </summary>

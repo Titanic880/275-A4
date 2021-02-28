@@ -39,6 +39,21 @@ namespace IotData
             DBFileManip fm1 = new DBFileManip();
 
             fm1.startfileworker();
+            bool connect = DBChecker.Connected();
+
+          
+            if (connect ==true )
+            {
+                // need to make the table  in file manip
+                fm1.CreateDataTable();
+                fm1.SelectAllFromDatabase();
+                //need to sill populate table with data in ToDatbaseQ
+                //and make sure of the timer tick
+               
+               // DataInfo.ToDatabaseQ
+
+            }
+
 
 
         }
@@ -70,6 +85,10 @@ namespace IotData
             // and put in your connection string in app config
             DBFileManip FM = new DBFileManip();
             dataGridView1.DataSource = FM.SelectAllFromDatabase();
+            
+
+         
+
         }
     }
 }
