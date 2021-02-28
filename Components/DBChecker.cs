@@ -22,28 +22,47 @@ namespace IotData.Components
             //SqlConnection conn = new SqlConnection(connectionString);
         }
 
-        string connectionString = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
+        private static string LabString = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
+        private static string DockString = ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString;
         SqlConnection conn;
+        //0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
+        static int ConnectionType = 0;
+
 
         /// <summary>
         /// Checks what form of the database to use
         /// </summary>
         /// <returns></returns>
-        public static bool CheckDataBaseType()
+        public static int CheckDataBaseType()
         {
-            throw new NotImplementedException();
+            if (Test_Conn(LabString))
+                return ConnectionType = 1;
+            else if (Test_Conn(DockString))
+                return ConnectionType = 2;
+            else
+                return ConnectionType = 0;
+        }
+
+        /// <summary>
+        /// Tests the Sql Connection
+        /// </summary>
+        /// <param name="connectionstring"></param>
+        /// <returns></returns>
+        internal static bool Test_Conn(string connectionstring)
+        {
+            return Test_Conn(new SqlConnection(connectionstring));
         }
 
         /// <summary>
         /// Tests the Sql Connection
         /// </summary>
         /// 
-
-
         // mitch i changed this from static to not static cusits thowing errors with it static
-        internal  bool Test_Conn()
+        internal static bool Test_Conn(SqlConnection connection)
         {
-            conn = new SqlConnection(connectionString);
+            //Checks for the connection string
+            if (connection.ConnectionString == null)
+                return false;
             string Table_Loggging = "Create Table Test_conn (" +
                  "ID int not null Primary key Identity(0,1)," +
                  "LogLevel int not null," +
@@ -56,12 +75,12 @@ namespace IotData.Components
 
             try
             {
-                conn.Open();
+                connection.Open();
 
                 //Tests to see if the table exists, if it doesn't the runs the Table create
                 try
                 {
-                    SqlCommand comm = new SqlCommand(check_tbl, conn);
+                    SqlCommand comm = new SqlCommand(check_tbl, connection);
                     comm.ExecuteScalar();
                 }
                 catch
@@ -70,10 +89,10 @@ namespace IotData.Components
                 }
                 if (!test)
                 {
-                    SqlCommand cmd = new SqlCommand(Table_Loggging, conn);
+                    SqlCommand cmd = new SqlCommand(Table_Loggging, connection);
                     cmd.ExecuteScalar();
                 }
-                SqlCommand drop = new SqlCommand("Drop Table Test_conn;", conn);
+                SqlCommand drop = new SqlCommand("Drop Table Test_conn;", connection);
                 drop.ExecuteScalar();
                 test = true;
             }
@@ -83,8 +102,8 @@ namespace IotData.Components
             }
             finally
             {
-                if (conn.State != ConnectionState.Closed)
-                    conn.Close();
+                if (connection.State != ConnectionState.Closed)
+                    connection.Close();
             }
 
             return test;
