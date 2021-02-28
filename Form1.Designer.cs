@@ -31,7 +31,7 @@ namespace IotData
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnInit = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -49,15 +49,15 @@ namespace IotData
             this.dataGridView1.Size = new System.Drawing.Size(583, 341);
             this.dataGridView1.TabIndex = 0;
             // 
-            // button1
+            // BtnInit
             // 
-            this.button1.Location = new System.Drawing.Point(601, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(107, 52);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Generate Data";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.BtnInit.Location = new System.Drawing.Point(601, 12);
+            this.BtnInit.Name = "BtnInit";
+            this.BtnInit.Size = new System.Drawing.Size(107, 52);
+            this.BtnInit.TabIndex = 1;
+            this.BtnInit.Text = "Generate Data";
+            this.BtnInit.UseVisualStyleBackColor = true;
+            this.BtnInit.Click += new System.EventHandler(this.BtnInit_Click);
             // 
             // button2
             // 
@@ -123,7 +123,7 @@ namespace IotData
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.BtnInit);
             this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
@@ -136,7 +136,7 @@ namespace IotData
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button BtnInit;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;

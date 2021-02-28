@@ -12,7 +12,7 @@ namespace IotData.Components
     {
         readonly BackgroundWorker wkr = new BackgroundWorker();
         public bool Completed { get; private set; } = false;
-        public uint WriteTotal { get; private set; } = 0;
+        public ulong WriteTotal { get; private set; } = 0;
         public LocalFileManip()
         {
             wkr.DoWork += Wkr_DoWork;

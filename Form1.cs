@@ -18,41 +18,57 @@ namespace IotData
     {
         bool cancel = false;
 
+        /// <summary>
+        /// Main instance of the DBFile Manip
+        /// </summary>
+        DBFileManip dbManip = null;
+
         public Form1()
         {
             InitializeComponent();
-            LocalFileManip.FileCheck();
-            
+            this.MaximizeBox = false;
 
-            this.MaximizeBox = false;            
+            Setup();
+
+
         }
+        /// <summary>
+        /// Primary Initilization Codes
+        /// </summary>
+        private void Setup()
+        {
+            LocalFileManip.FileCheck();
+            dbManip = new DBFileManip();
 
-        private void button1_Click(object sender, EventArgs e)
+            bool connect = DBChecker.Connected();
+
+            //Checks whether or not Connection is active or not
+            if (connect)
+            {
+                dbManip.StartFileWorker();
+                //dbManip.SelectAllFromDatabase();
+                
+                ///need to sill populate table with data in ToDatbaseQ
+                ///and make sure of the timer tick
+
+                // DataInfo.ToDatabaseQ
+
+            }
+
+        }
+        /// <summary>
+        /// Initilizes the Program start
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnInit_Click(object sender, EventArgs e)
         {
            // DataSchema ds = new DataSchema();
 
-            // sooooo i believe we want to summon the background worker here
-            //though i want to say the background worker will be living in its own seperate class
-            //im going to guess thats what DBFileManip is about,
-            //so im going to be treating dbfilemanp as its  a background worker with its sperarate methods
-            
-            DBFileManip fm1 = new DBFileManip();
-
-            fm1.startfileworker();
-            bool connect = DBChecker.Connected();
-
-          
-            if (connect ==true )
-            {
-                // need to make the table  in file manip
-                fm1.CreateDataTable();
-                fm1.SelectAllFromDatabase();
-                //need to sill populate table with data in ToDatbaseQ
-                //and make sure of the timer tick
-               
-               // DataInfo.ToDatabaseQ
-
-            }
+            /// sooooo i believe we want to summon the background worker here
+            ///though i want to say the background worker will be living in its own seperate class
+            ///im going to guess thats what DBFileManip is about,
+            ///so im going to be treating dbfilemanp as its  a background worker with its sperarate methods
 
 
 
@@ -85,10 +101,6 @@ namespace IotData
             // and put in your connection string in app config
             DBFileManip FM = new DBFileManip();
             dataGridView1.DataSource = FM.SelectAllFromDatabase();
-            
-
-         
-
         }
     }
 }

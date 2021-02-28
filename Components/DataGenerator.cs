@@ -15,10 +15,17 @@ namespace IotData.Components
             wkr.WorkerSupportsCancellation = true;
         }
 
+        /// <summary>
+        /// Starts the Data Generator
+        /// </summary>
         public void Start()
         {
             wkr.RunWorkerAsync();
         }
+
+        /// <summary>
+        /// Stops the Data Generator
+        /// </summary>
         public void Stop()
         {
             wkr.CancelAsync();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,19 +15,60 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
-
+        BackgroundWorker wkr = new BackgroundWorker();
         private SqlConnection conn;
 
 
         public DBFileManip()
         {
+            //checks to see if the db has already been assigned
             if (DBChecker.ConnectionType == -1)
                 DBChecker.SetDatabaseType();
+
+            //Initilizes the connection
+            conn = new SqlConnection(DataInfo.connections[DBChecker.ConnectionType]);
+
+            //Checks if the table exists, if it doesn't then it generates it
+            if (DBChecker.CheckTableExist("Data"))
+                CreateDataTable();
+
+            //Sets up the worker
+            wkr.DoWork += Wkr_DoWork;
+            wkr.RunWorkerCompleted += Wkr_RunWorkerCompleted;
+            wkr.WorkerSupportsCancellation = true;
         }
 
-        public void startfileworker()
+        /// <summary>
+        /// Main Work of the worker is done here
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
-            //bgw.RunWorkerAsync();
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Runs when the worker has completed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Wkr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Starts the worker that deals with the Database
+        /// </summary>
+        public void StartFileWorker()
+        {
+            wkr.RunWorkerAsync();
+        }
+
+        public void StopFileWorker()
+        {
+            wkr.CancelAsync();
         }
 
         /// <summary>
@@ -36,7 +78,6 @@ namespace IotData.Components
         public DataTable SelectAllFromDatabase(string TableName = "Data")
         {
             DataTable ret = new DataTable();
-            SqlConnection conn = new SqlConnection(DataInfo.connections[0]);
             SqlCommand cmd = new SqlCommand($"Select * From {TableName}", conn);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             adapter.Fill(ret);
@@ -44,7 +85,7 @@ namespace IotData.Components
         }
         //bool createscheema = true;
 
-        public void CreateDataTable()
+        private void CreateDataTable()
         {
             string createTableQuery = @"
 USE [275Assign5DB]
@@ -75,15 +116,16 @@ GO
 
                   
                 ";
-            //CREATE TABLE 275Assign5DB.dbo.Data
-            //      (
-            //          Name varchar(50) NOT NULL,
-            //          Phone varchar(11) NOT NULL,
-            //          Email varchar(50) NOT NULL,
-            //          Picture varbinary(MAX) NOT NULL,
-            //          Message varchar(250) NOT NULL,
-            //          SignDatetime datetime NOT NULL
-            //       )
+            /*
+            CREATE TABLE 275Assign5DB.dbo.Data
+                  (
+                      Name varchar(50) NOT NULL,
+                      Phone varchar(11) NOT NULL,
+                      Email varchar(50) NOT NULL,
+                      Picture varbinary(MAX) NOT NULL,
+                      Message varchar(250) NOT NULL,
+                      SignDatetime datetime NOT NULL
+                   )*/
             SqlCommand cmd = new SqlCommand(createTableQuery, conn);
 
             try
@@ -99,7 +141,7 @@ GO
             }
             finally
             {
-
+                if(conn.State != ConnectionState.Closed)
                 conn.Close();
 
             }
