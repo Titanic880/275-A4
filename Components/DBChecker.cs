@@ -12,21 +12,13 @@ namespace IotData.Components
     /// <summary>
     /// Used to Check if the database exists
     /// </summary>
-    public class DBChecker
+    public static class DBChecker
     {
-        //Create either a timer or a background worker to check every 1-5 seconds
-        //a method from here is called if the background worker in DBFileManip returns false
-        
-        public DBChecker()
-        {
-            //SqlConnection conn = new SqlConnection(connectionString);
-        }
-
-        private static string LabString = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
-        private static string DockString = ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString;
-        SqlConnection conn;
+        private static string LabString { get; } = ConfigurationManager.ConnectionStrings["labString"].ConnectionString;
+        private static string DockString { get; } = ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString;
+        private static SqlConnection conn;
         //0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
-        public static int ConnectionType = 0;
+        public static int ConnectionType { get; private set; } = 0;
 
 
         /// <summary>
@@ -48,7 +40,7 @@ namespace IotData.Components
         /// </summary>
         /// <param name="connectionstring"></param>
         /// <returns></returns>
-        internal static bool Test_Conn(string connectionstring)
+        private static bool Test_Conn(string connectionstring)
         {
             return Test_Conn(new SqlConnection(connectionstring));
         }
@@ -56,21 +48,20 @@ namespace IotData.Components
         /// <summary>
         /// Tests the Sql Connection
         /// </summary>
-        /// 
-        // mitch i changed this from static to not static cusits thowing errors with it static  //mitch fixed this!
-        internal static bool Test_Conn(SqlConnection connection)
+        ///
+        private static bool Test_Conn(SqlConnection connection)
         {
             //Checks for the connection string
             if (connection.ConnectionString == null)
                 return false;
 
-            string Table_Loggging = "Create Table Test_conn (" +
+            string Table_Loggging = "Create Table F76C87B4FC574A59B9F469E075D30FD7240C3252661179F570471FBF9C2C1EC2 (" +
                  "ID int not null Primary key Identity(0,1)," +
                  "LogLevel int not null," +
                  "Error_Desc varchar(50)," +
                  "Time_Of_Error DateTime not null" +
                  ");";
-            string check_tbl = "Select * from Test_conn";
+            string check_tbl = "Select * from F76C87B4FC574A59B9F469E075D30FD7240C3252661179F570471FBF9C2C1EC2";
 
             bool test = true;
 
@@ -90,9 +81,7 @@ namespace IotData.Components
                 if (!test)
                 {
                     SqlCommand cmd = new SqlCommand(Table_Loggging, connection);
-                    cmd.ExecuteNonQuery();
-
-                    
+                    cmd.ExecuteNonQuery();                  
                 }
                 SqlCommand drop = new SqlCommand("Drop Table Test_conn;", connection);
                 drop.ExecuteNonQuery();
@@ -109,9 +98,5 @@ namespace IotData.Components
             }
             return test;
         }
-
-
-
-
     }
 }

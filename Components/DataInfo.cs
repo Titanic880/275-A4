@@ -42,14 +42,5 @@ namespace IotData.Components
 
         public static readonly Random rand = new Random();
         public static readonly Random rand2 = new Random(rand.Next());
-        //make number to equal how many threads, when a process is finished it either incruiments or decriments
-        //2 for timeer
-        //2 for comp
-
-        //generic info
-        // were using this cus wen cant talk to the form nicely
-
-
-
     }
 }

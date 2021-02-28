@@ -60,9 +60,9 @@ namespace IotData.Components
         }
         private void GenerateWaterData()
         {
-            UOM1 = "CM"; //string
-            UOM2 = "TEMPCelsius"; // string
-            GenerateData(1, 1, 100000); // mitch im classifying these vals as decimal in the database!
+            UOM1 = "CM"; 
+            UOM2 = "TEMPCelsius"; 
+            GenerateData(1, 1, 100000); 
         }
         private void GenerateGPSData()
         {
