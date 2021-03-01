@@ -22,6 +22,9 @@ namespace IotData
         /// Main instance of the DBFile Manip
         /// </summary>
         DBFileManip dbManip = null;
+        DataGenerator DataGen = null;
+        LocalFileManip LocalManip = null;
+
 
         public Form1()
         {
@@ -39,13 +42,16 @@ namespace IotData
         {
             LocalFileManip.FileCheck();
             dbManip = new DBFileManip();
+            DataGen = new DataGenerator();
+            LocalManip = new LocalFileManip();
+
 
             bool connect = DBChecker.Connected();
 
             //Checks whether or not Connection is active or not
            if (connect)
            {
-                dbManip.StartFileWorker();
+                
                 //dbManip.SelectAllFromDatabase();
                 
                 ///need to sill populate table with data in ToDatbaseQ
@@ -63,7 +69,7 @@ namespace IotData
         /// <param name="e"></param>
         private void BtnInit_Click(object sender, EventArgs e)
         {
-           // DataSchema ds = new DataSchema();
+            // DataSchema ds = new DataSchema();
 
             /// sooooo i believe we want to summon the background worker here
             ///though i want to say the background worker will be living in its own seperate class
@@ -71,7 +77,7 @@ namespace IotData
             ///so im going to be treating dbfilemanp as its  a background worker with its sperarate methods
 
 
-
+            dbManip.StartFileWorker();
         }
 
         private void button2_Click(object sender, EventArgs e)
