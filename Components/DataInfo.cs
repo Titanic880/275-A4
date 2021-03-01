@@ -45,6 +45,10 @@ namespace IotData.Components
         /// if the database is not found then the schema is loaded into this queue
         /// </summary>
         public static Queue<DataSchema> ToDatabaseQ = new Queue<DataSchema>();
+        /// <summary>
+        /// Overflow is for when a insert Fails
+        /// </summary>
+        public static Queue<DataSchema> OverflowQ = new Queue<DataSchema>();
 
         /// <summary>
         /// The Type of device

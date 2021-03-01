@@ -5,7 +5,6 @@ namespace IotData.Components
     ///The data Schema for generating the Data used
     public class DataSchema
     {
-        
 
         readonly string DeviceName = null;
         readonly DataInfo.DataType DeviceType;
@@ -15,6 +14,7 @@ namespace IotData.Components
         decimal UOM1Value = 0;
         decimal UOM2Value = 0;
         DateTime TimeStamp;
+
         /// <summary>
         /// Returns a string of the Datafile
         /// </summary>
@@ -75,6 +75,7 @@ namespace IotData.Components
             UOM2 = vals[5];
             UOM2Value = Convert.ToDecimal(vals[6]);
         }
+
         private void GenerateElectricData()
         {
             UOM1 = "kWH";

@@ -45,28 +45,16 @@ namespace IotData.Components
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
             //just checking to see if theres something int the queue
-            if (DataInfo.ToDatabaseQ.Count > 0)
+            while (!wkr.CancellationPending)
             {
-
-                //a for loop that loops for the amount of items in the queue
-                for (int i = 0; i < DataInfo.ToDatabaseQ.Count(); i++)
+                if(DBChecker.Connected() && DataInfo.ToDatabaseQ.Count != 0)
                 {
                     //popping the first item off the database
                     string str = DataInfo.ToDatabaseQ.Dequeue().GetInformation();
-                    
-                    //then splitting it
-                    string[] item = str.Split(',');
-
-                    //passes data into an insert method
-                    InsertData(item[0],
-                               item[1],
-            Convert.ToDateTime(item[2]),
-                               item[3],
-             Convert.ToDecimal(item[4]),
-                               item[5],
-             Convert.ToDecimal(item[6]));
+                    //Inserts to Database -- if false then it adds it to the Queue for the File system
+                    if (InsertData(str))
+                        DataInfo.OverflowQ.Enqueue(new DataSchema(str));
                 }
-
             }
             //todo
         }
@@ -82,20 +70,26 @@ namespace IotData.Components
             throw new NotImplementedException();
         }
 
-        public void InsertData(string DeviceName, string DeviceType, DateTime TimeStamp, string UnitOfMeasure1,  decimal UnitOfMeasureValue1, string UnitOfMeasure2,decimal UnitOfMeasureValue2)
+        public bool InsertData(string DeviceName)
         {
+            //Splits the input
+            string[] Values = DeviceName.Split(',');
+
+            //Builds the Query
             string query = $@"
                 Insert into Data values (
                    
-                    '{DeviceName}',
-                    '{DeviceType}',
-                    '{TimeStamp}',
-                    '{UnitOfMeasure1}',
-                    '{UnitOfMeasureValue1}', 
-                    '{UnitOfMeasure2}',
-                    '{UnitOfMeasureValue2}'
+                    '{Values[0]}',
+                    '{Values[1]}',
+                    '{Values[2]}',
+                    '{Values[3]}',
+                    '{Values[4]}', 
+                    '{Values[5]}',
+                    '{Values[6]}'
                     )";
             SqlCommand cmd = new SqlCommand(query, conn);
+            
+            //Runs the Query -- If the insert fails it returns false
             try
             {
                 conn.Open();
@@ -103,12 +97,13 @@ namespace IotData.Components
             }
             catch
             {
-                throw;
+                return false;
             }
             finally
             {
                 conn.Close();
             }
+            return true;
         }
 
 
@@ -170,6 +165,7 @@ GO
 
                   
                 ";
+            
             /*
             CREATE TABLE 275Assign5DB.dbo.Data
                   (

@@ -47,6 +47,14 @@ namespace IotData.Components
         {
             while (!wkr.CancellationPending)
             {
+                //Checks the overflow Queue
+                if (DataInfo.OverflowQ.Count != 0)
+                {
+                    for (int i = 0; i < DataInfo.OverflowQ.Count; i++)
+                        using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
+                            sw.WriteLine(DataInfo.OverflowQ.Dequeue().GetInformation());
+                }
+
                 //Checks that the database is offline
                 if (!DBChecker.Connected())
                 {
