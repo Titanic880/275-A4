@@ -78,7 +78,6 @@ namespace IotData.Components
             //Builds the Query
             string query = $@"
                 Insert into Data values (
-                   
                     '{Values[0]}',
                     '{Values[1]}',
                     '{Values[2]}',

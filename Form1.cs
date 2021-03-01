@@ -80,9 +80,11 @@ namespace IotData
             dbManip.StartFileWorker();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
-
+            DataGen.Stop();
+            LocalManip.Stop();
+            dbManip.StopFileWorker();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -97,12 +99,18 @@ namespace IotData
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            if (DataGen.Completed)
+            {
+                //DO STUFF EHRE
+            }
+            
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
+
+            
         }
     }
 }
