@@ -77,6 +77,16 @@ namespace IotData
             dbManip.StopFileWorker();
         }
 
+        private void BtnGoOff_Click(object sender, EventArgs e)
+        {
+            DBChecker.DEBUG_SETOFFLINE();
+        }
+
+        private void BtnGoOnline_Click(object sender, EventArgs e)
+        {
+            DBChecker.DEBUG_SETONLINE();
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (DataGen.Completed)
@@ -92,5 +102,7 @@ namespace IotData
 
             
         }
+
+
     }
 }

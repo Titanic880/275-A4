@@ -35,7 +35,8 @@ namespace IotData
             this.BtnCancel = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button6 = new System.Windows.Forms.Button();
+            this.BtnGoOff = new System.Windows.Forms.Button();
+            this.BtnGoOnline = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +70,7 @@ namespace IotData
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(601, 244);
+            this.button5.Location = new System.Drawing.Point(599, 254);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(107, 52);
             this.button5.TabIndex = 5;
@@ -82,21 +83,33 @@ namespace IotData
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button6
+            // BtnGoOff
             // 
-            this.button6.Location = new System.Drawing.Point(601, 302);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(107, 51);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Test Offline Mode";
-            this.button6.UseVisualStyleBackColor = true;
+            this.BtnGoOff.Location = new System.Drawing.Point(601, 128);
+            this.BtnGoOff.Name = "BtnGoOff";
+            this.BtnGoOff.Size = new System.Drawing.Size(107, 51);
+            this.BtnGoOff.TabIndex = 6;
+            this.BtnGoOff.Text = "Go Offline";
+            this.BtnGoOff.UseVisualStyleBackColor = true;
+            this.BtnGoOff.Click += new System.EventHandler(this.BtnGoOff_Click);
+            // 
+            // BtnGoOnline
+            // 
+            this.BtnGoOnline.Location = new System.Drawing.Point(601, 185);
+            this.BtnGoOnline.Name = "BtnGoOnline";
+            this.BtnGoOnline.Size = new System.Drawing.Size(107, 51);
+            this.BtnGoOnline.TabIndex = 7;
+            this.BtnGoOnline.Text = "Go Online";
+            this.BtnGoOnline.UseVisualStyleBackColor = true;
+            this.BtnGoOnline.Click += new System.EventHandler(this.BtnGoOnline_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 362);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.BtnGoOnline);
+            this.Controls.Add(this.BtnGoOff);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnInit);
@@ -116,7 +129,8 @@ namespace IotData
         private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button BtnGoOff;
+        private System.Windows.Forms.Button BtnGoOnline;
     }
 }
 

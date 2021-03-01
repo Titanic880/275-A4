@@ -47,7 +47,7 @@ namespace IotData.Components
         /// <returns></returns>
         public static bool Connected()
         {
-            if (ConnectionType != -1)
+            if (ConnectionType == 0 || ConnectionType == 1)
                 return Test_Conn(DataInfo.connections[ConnectionType]);
             else
             {
@@ -124,9 +124,12 @@ namespace IotData.Components
             return test;
         }
 
-
-        /// theres an error in this code block i think
-        ///this is null??
+        /// <summary>
+        /// Tests the connection for the given table
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="TableName"></param>
+        /// <returns></returns>
         private static bool Test_Conn(SqlConnection connection, string TableName)
         {
             //Checks for the connection string
@@ -164,6 +167,16 @@ namespace IotData.Components
                     connection.Close();
             }
             return test;
+        }
+
+
+        public static void DEBUG_SETOFFLINE()
+        {
+            ConnectionType = -1;
+        }
+        public static void DEBUG_SETONLINE()
+        {
+            SetDatabaseType();
         }
     }
 
