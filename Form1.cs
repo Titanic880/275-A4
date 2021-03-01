@@ -43,8 +43,8 @@ namespace IotData
             bool connect = DBChecker.Connected();
 
             //Checks whether or not Connection is active or not
-            if (connect)
-            {
+           if (connect)
+           {
                 dbManip.StartFileWorker();
                 //dbManip.SelectAllFromDatabase();
                 
@@ -53,7 +53,7 @@ namespace IotData
 
                 // DataInfo.ToDatabaseQ
 
-            }
+          }
 
         }
         /// <summary>

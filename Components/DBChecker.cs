@@ -116,6 +116,10 @@ namespace IotData.Components
             }
             return test;
         }
+
+
+        /// theres an error in this code block i think
+        ///this is null??
         private static bool Test_Conn(SqlConnection connection, string TableName)
         {
             //Checks for the connection string
