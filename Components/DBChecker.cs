@@ -8,7 +8,7 @@ namespace IotData.Components
     /// </summary>
     public static class DBChecker
     {
-        private readonly static SqlConnection conn;
+        private static SqlConnection conn;
         /// <summary>
         /// 0 = Uninitilized, 1 = Windows Verf(Lab), 2=Docker
         /// </summary>
@@ -21,11 +21,14 @@ namespace IotData.Components
         public static int SetDatabaseType()
         {
             if (Test_Conn(DataInfo.connections[0]))
-                return ConnectionType = 0;
+                ConnectionType = 0;
             else if (Test_Conn(DataInfo.connections[1]))
-                return ConnectionType = 1;
+                ConnectionType = 1;
             else
-                return ConnectionType = -1;
+                ConnectionType = -1;
+
+            conn = new SqlConnection(DataInfo.connections[ConnectionType]);
+            return ConnectionType;
         }
 
         /// <summary>
@@ -69,8 +72,12 @@ namespace IotData.Components
         ///
         private static bool Test_Conn(SqlConnection connection)
         {
-            //Checks for the connection string
-            if (connection.ConnectionString == null)
+            //Checks if the var or the connection string is null
+            if(connection == null)
+            {
+
+            }
+            else if (connection.ConnectionString == null)
                 return false;
 
             string Table_Loggging = "Create Table TEST_CONN (" +

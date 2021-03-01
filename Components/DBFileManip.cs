@@ -28,13 +28,7 @@ namespace IotData.Components
             //Initilizes the connection
             conn = new SqlConnection(DataInfo.connections[DBChecker.ConnectionType]);
 
-            //something is wrong in here
-            //Checks if the table exists, if it doesn't then it generates it
-
-
-            ///I commented the checking if table exists beacsue there is an error with db checker, with the last code that mitch commited
-
-            //if (DBChecker.CheckTableExist("Data"))
+            if (DBChecker.CheckTableExist("Data"))
                 CreateDataTable();
 
             //Sets up the worker
@@ -50,29 +44,29 @@ namespace IotData.Components
         /// <param name="e"></param>
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
-            // throw new NotImplementedException();
-
-            ///just checking to see if theres something int the queue
+            //just checking to see if theres something int the queue
             if (DataInfo.ToDatabaseQ.Count > 0)
             {
 
-                ///a for loop that loops for the amount of items in the queue
+                //a for loop that loops for the amount of items in the queue
                 for (int i = 0; i < DataInfo.ToDatabaseQ.Count(); i++)
                 {
-                    string[] item;
-                    ///popping the first item off the database
-                    string str = DataInfo.ToDatabaseQ.Dequeue().ToString();
-                    ///then splitting it 
-                    item = str.Split(',');
+                    //popping the first item off the database
+                    string str = DataInfo.ToDatabaseQ.Dequeue().GetInformation();
                     
-                    //working on fixing datatypes rn
-                    DBFileManip.InsertData(item[0], item[1], item[2], item[3], item[4], item[5], item[6]);
-                    foreach (string tmp in item)
-                    {
+                    //then splitting it
+                    string[] item = str.Split(',');
 
-                    }
+                    //passes data into an insert method
+                    InsertData(item[0],
+                               item[1],
+            Convert.ToDateTime(item[2]),
+                               item[3],
+             Convert.ToDecimal(item[4]),
+                               item[5],
+             Convert.ToDecimal(item[6]));
                 }
-                
+
             }
             //todo
         }
@@ -84,17 +78,11 @@ namespace IotData.Components
         /// <param name="e"></param>
         private void Wkr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //  throw new NotImplementedException();
             //todo
-
-           
-
-
-
-
+            throw new NotImplementedException();
         }
 
-        public void InsertData(string DeviceName, string DeviceType, DateTime TimeStamp, string UnitOfMeasure1,  Decimal UnitOfMeasureValue1, string UnitOfMeasure2,Decimal UnitOfMeasureValue2)
+        public void InsertData(string DeviceName, string DeviceType, DateTime TimeStamp, string UnitOfMeasure1,  decimal UnitOfMeasureValue1, string UnitOfMeasure2,decimal UnitOfMeasureValue2)
         {
             string query = $@"
                 Insert into Data values (
