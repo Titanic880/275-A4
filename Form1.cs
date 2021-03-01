@@ -1,15 +1,5 @@
 ﻿using System;
 using IotData.Components;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace IotData
@@ -48,7 +38,7 @@ namespace IotData
 
             bool connect = DBChecker.Connected();
 
-            //Checks whether or not Connection is active or not
+           //Checks whether or not Connection is active or not
            if (connect)
            {
                 
@@ -85,16 +75,6 @@ namespace IotData
             DataGen.Stop();
             LocalManip.Stop();
             dbManip.StopFileWorker();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
