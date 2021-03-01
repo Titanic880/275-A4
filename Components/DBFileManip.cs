@@ -28,7 +28,7 @@ namespace IotData.Components
             //Initilizes the connection
             conn = new SqlConnection(DataInfo.connections[DBChecker.ConnectionType]);
 
-            if (DBChecker.CheckTableExist("Data"))
+            if (!DBChecker.CheckTableExist("Data"))
                 CreateDataTable();
 
             //Sets up the worker
@@ -137,33 +137,16 @@ namespace IotData.Components
         private void CreateDataTable()
         {
             string createTableQuery = @"
-USE [275Assign5DB]
-GO
-
-/****** Object:  Table [dbo].[Data]    Script Date: 2/28/2021 1:34:10 PM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[Data](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
+                  CREATE TABLE [dbo].[Data](
+	[ID] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[DeviceName] [nvarchar](50) NOT NULL,
 	[DeviceType] [nvarchar](50) NOT NULL,
 	[TimeStamp] [datetime] NOT NULL,
 	[UnitOfMeasure1] [nvarchar](50) NOT NULL,
 	[UnitOfMeasureValue1] [decimal](18, 0) NULL,
 	[UnitOfMeasure2] [nvarchar](50) NOT NULL,
-	[UnitOFMeasureValue2] [decimal](18, 0) NULL,
- CONSTRAINT [PK_Data] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-
-                  
+	[UnitOFMeasureValue2] [decimal](18, 0) NULL
+	);
                 ";
             
             /*
@@ -184,7 +167,7 @@ GO
 
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
                 //createscheema = false;
                 //throw;
@@ -193,10 +176,7 @@ GO
             {
                 if(conn.State != ConnectionState.Closed)
                 conn.Close();
-
             }
-
-
         }
     }
 }
