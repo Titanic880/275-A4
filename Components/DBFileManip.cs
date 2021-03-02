@@ -27,7 +27,7 @@ namespace IotData.Components
 
             //Initilizes the connection
             conn = new SqlConnection(DataInfo.connections[DBChecker.ConnectionType]);
-
+            DataInfo.Connected = true;
             if (!DBChecker.CheckTableExist("Data"))
                 CreateDataTable();
 
@@ -58,6 +58,8 @@ namespace IotData.Components
                         DataInfo.Connected = DBChecker.Connected();
                     }
                 }
+                else if(!DataInfo.Connected)
+                    DataInfo.Connected = DBChecker.Connected();
             }
             //todo
         }
@@ -78,16 +80,15 @@ namespace IotData.Components
             string[] Values = DeviceName.Split(',');
 
             //Builds the Query
-            string query = $@"
-                Insert into Data values (
-                    '{Values[0]}',
-                    '{Values[1]}',
-                    '{Values[2]}',
-                    '{Values[3]}',
-                    '{Values[4]}', 
-                    '{Values[5]}',
-                    '{Values[6]}'
-                    )";
+            string query = 
+                $"INSERT INTO Data VALUES ("+
+                $"'{Values[0]}',"+
+                $"'{Values[1]}',"+
+                $"'{Values[2]}',"+
+                $"'{Values[3]}',"+
+                $"'{Values[4]}',"+ 
+                $"'{Values[5]}',"+
+                $"'{Values[6]}')";
             SqlCommand cmd = new SqlCommand(query, conn);
             
             //Runs the Query -- If the insert fails it returns false

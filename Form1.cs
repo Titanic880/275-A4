@@ -56,6 +56,7 @@ namespace IotData
             DataGen.Start();
             LocalManip.Start();
             dbManip.Start();
+            MessageBox.Show("Generation has Started!");
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

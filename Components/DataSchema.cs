@@ -21,7 +21,7 @@ namespace IotData.Components
         /// <returns></returns>
         public string GetInformation()
         {                                               //2021-03-02 12:42:40 AM
-            return $"{DeviceName},{DeviceType},{TimeStamp.ToString(System.Globalization.CultureInfo.InvariantCulture)},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
+            return $"{DeviceName},{DeviceType},{TimeStamp.ToString(System.Globalization.CultureInfo.InvariantCulture)},{UOM1},{UOM1Value},{UOM2},{UOM2Value}";
         }
 
         public DataSchema(string dName, DataInfo.DataType Type)
