@@ -84,6 +84,11 @@ namespace IotData
 
                 dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
 
+                if (dbManip.Completed)
+                {
+
+                }
+               
 
 
             }
