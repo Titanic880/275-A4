@@ -44,7 +44,7 @@ namespace IotData.Components
         /// <param name="e"></param>
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
-            //just checking to see if theres something int the queue
+            //Checks for Cancel
             while (!wkr.CancellationPending)
             {
                 if(DBChecker.Connected() && DataInfo.ToDatabaseQ.Count != 0)
@@ -52,7 +52,7 @@ namespace IotData.Components
                     //popping the first item off the database
                     string str = DataInfo.ToDatabaseQ.Dequeue().GetInformation();
                     //Inserts to Database -- if false then it adds it to the Queue for the File system
-                    if (InsertData(str))
+                    if (!InsertData(str))
                         DataInfo.OverflowQ.Enqueue(new DataSchema(str));
                 }
             }
