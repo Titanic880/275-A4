@@ -35,11 +35,11 @@ namespace IotData
 
             bool connect = DBChecker.Connected();
 
-           //Checks whether or not Connection is active or not
-           if (connect)
-           {
+            //Checks whether or not Connection is active or not
+            if (connect)
+            {
                 MessageBox.Show("You are connected!");
-           }
+            }
             else
             {
                 MessageBox.Show("You have not connected; Check your connection String.");
@@ -80,19 +80,19 @@ namespace IotData
         {
             if (DataGen.Completed)
             {
-                //DO STUFF EHRE
-
-                dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
-
-                if (dbManip.Completed)
-                {
-
-                }
-               
-
-
+                MessageBox.Show("Data Generation has Stopped/Completed");
             }
-            
+            if (dbManip.Completed)
+            {
+                MessageBox.Show("Database Systems has Stopped");
+            }
+            if (LocalManip.Completed)
+            {
+                MessageBox.Show("Local File Systems has Stopped");
+            }
+
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)

@@ -165,7 +165,7 @@ namespace IotData.Components
 
                 cmd.ExecuteNonQuery();
             }
-            catch(Exception e)
+            catch
             {
                 
             }
