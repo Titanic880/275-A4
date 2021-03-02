@@ -36,12 +36,13 @@ namespace IotData.Components
             {
                 if (wkr.CancellationPending)                        //if told to stop
                     break;
-                
-                for(int x = 0; x < DataInfo.DeviceCount; x++)       //Goes through all the devices and generates data for them
-                    DataInfo.InitialQueue.Enqueue
-                        (new DataSchema(x+"."+i, (DataInfo.DataType)DataInfo.rand.Next(4)));
 
+                DataInfo.DataType dt = (DataInfo.DataType)DataInfo.rand.Next(4);
                 
+                for (int x = 0; x < DataInfo.DeviceCount; x++)       //Goes through all the devices and generates data for them
+                    DataInfo.InitialQueue.Enqueue
+                        (new DataSchema(x+"."+i, dt));
+
                 System.Threading.Thread.Sleep(DataInfo.dataDelay);  //Delay between Generations
             }
         }
