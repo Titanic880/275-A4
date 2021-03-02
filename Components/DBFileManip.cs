@@ -17,7 +17,7 @@ namespace IotData.Components
     {
         BackgroundWorker wkr = new BackgroundWorker();
         private SqlConnection conn;
-
+        public bool Completed { get; private set; } = false;
 
         public DBFileManip()
         {
@@ -66,8 +66,7 @@ namespace IotData.Components
         /// <param name="e"></param>
         private void Wkr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            //todo
-            throw new NotImplementedException();
+            Completed = true;
         }
 
         public bool InsertData(string DeviceName)
@@ -168,8 +167,7 @@ namespace IotData.Components
             }
             catch(Exception e)
             {
-                //createscheema = false;
-                //throw;
+                
             }
             finally
             {
