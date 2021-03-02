@@ -7,7 +7,6 @@ namespace IotData.Components
         private readonly BackgroundWorker wkr = new BackgroundWorker();
         public bool Completed { get; private set; } = false;
 
-
         public DataGenerator()
         {
             wkr.DoWork += Wkr_DoWork;
@@ -30,18 +29,26 @@ namespace IotData.Components
         {
             wkr.CancelAsync();
         }
+
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
-            for(int i = int.MaxValue; i > 0; i-=2)
+            for(int i = int.MaxValue; i > 0; i-=2)                  //Essentially an infinite loop
             {
-                DataInfo.InitialQueue.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand.Next(4)));
-                DataInfo.InitialQueue.Enqueue(new DataSchema(i.ToString(), (DataInfo.DataType)DataInfo.rand2.Next(4)));
+                if (wkr.CancellationPending)                        //if told to stop
+                    break;
+                
+                for(int x = 0; x < DataInfo.DeviceCount; x++)       //Goes through all the devices and generates data for them
+                    DataInfo.InitialQueue.Enqueue
+                        (new DataSchema(x+"."+i, (DataInfo.DataType)DataInfo.rand.Next(4)));
+
+                
+                System.Threading.Thread.Sleep(DataInfo.dataDelay);  //Delay between Generations
             }
         }
+
         private void Wkr_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Completed = true;
         }
-
     }
 }
