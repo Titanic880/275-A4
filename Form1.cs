@@ -53,7 +53,7 @@ namespace IotData
         private void BtnInit_Click(object sender, EventArgs e)
         {
             // DataSchema ds = new DataSchema();
-            dbManip.StartFileWorker();
+            dbManip.Start();
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -61,7 +61,7 @@ namespace IotData
             //finished
             DataGen.Stop();
             LocalManip.Stop();
-            dbManip.StopFileWorker();
+            dbManip.Stop();
         }
 
         private void BtnGoOff_Click(object sender, EventArgs e)

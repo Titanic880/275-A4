@@ -108,12 +108,12 @@ namespace IotData.Components
         /// <summary>
         /// Starts the worker that deals with the Database
         /// </summary>
-        public void StartFileWorker()
+        public void Start()
         {
             wkr.RunWorkerAsync();
         }
 
-        public void StopFileWorker()
+        public void Stop()
         {
             wkr.CancelAsync();
         }
