@@ -41,7 +41,7 @@ namespace IotData
            //Checks whether or not Connection is active or not
            if (connect)
            {
-                
+                MessageBox.Show("You are connected!");
                 //dbManip.SelectAllFromDatabase();
                 
                 ///need to sill populate table with data in ToDatbaseQ
@@ -49,7 +49,7 @@ namespace IotData
 
                 // DataInfo.ToDatabaseQ
 
-          }
+           }
 
         }
         /// <summary>
@@ -72,6 +72,7 @@ namespace IotData
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
+            //finished
             DataGen.Stop();
             LocalManip.Stop();
             dbManip.StopFileWorker();
@@ -79,11 +80,13 @@ namespace IotData
 
         private void BtnGoOff_Click(object sender, EventArgs e)
         {
+            //finished
             DBChecker.DEBUG_SETOFFLINE();
         }
 
         private void BtnGoOnline_Click(object sender, EventArgs e)
         {
+            //finished
             DBChecker.DEBUG_SETONLINE();
         }
 
@@ -92,6 +95,11 @@ namespace IotData
             if (DataGen.Completed)
             {
                 //DO STUFF EHRE
+
+                dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
+
+
+
             }
             
         }
