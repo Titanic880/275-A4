@@ -56,7 +56,7 @@ namespace IotData
             DataGen.Start();
             LocalManip.Start();
             dbManip.Start();
-            MessageBox.Show("Generation has Started!");
+            MessageBox.Show("Generation has Started! :)");
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -65,33 +65,36 @@ namespace IotData
             DataGen.Stop();
             LocalManip.Stop();
             dbManip.Stop();
+            MessageBox.Show("Database is stopping! :)");
         }
 
         private void BtnGoOff_Click(object sender, EventArgs e)
         {
             //finished
             DBChecker.DEBUG_SETOFFLINE();
+            MessageBox.Show("Database is going offline! :)");
         }
 
         private void BtnGoOnline_Click(object sender, EventArgs e)
         {
             //finished
             DBChecker.DEBUG_SETONLINE();
+            MessageBox.Show("Database is coming online! :)");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (DataGen.Completed)
             {
-                MessageBox.Show("Data Generation has Stopped/Completed");
+                MessageBox.Show("Data Generation has Stopped/Completed!");
             }
             if (dbManip.Completed)
             {
-                MessageBox.Show("Database Systems has Stopped");
+                MessageBox.Show("Database Systems has Stopped!");
             }
             if (LocalManip.Completed)
             {
-                MessageBox.Show("Local File Systems has Stopped");
+                MessageBox.Show("Local File Systems has Stopped!");
             }
 
 
