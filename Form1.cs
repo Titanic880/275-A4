@@ -15,16 +15,14 @@ namespace IotData
         DataGenerator DataGen = null;
         LocalFileManip LocalManip = null;
 
-
         public Form1()
         {
             InitializeComponent();
             this.MaximizeBox = false;
 
             Setup();
-
-
         }
+
         /// <summary>
         /// Primary Initilization Codes
         /// </summary>
@@ -35,22 +33,17 @@ namespace IotData
             DataGen = new DataGenerator();
             LocalManip = new LocalFileManip();
 
-
             bool connect = DBChecker.Connected();
 
            //Checks whether or not Connection is active or not
            if (connect)
            {
                 MessageBox.Show("You are connected!");
-                //dbManip.SelectAllFromDatabase();
-                
-                ///need to sill populate table with data in ToDatbaseQ
-                ///and make sure of the timer tick
-
-                // DataInfo.ToDatabaseQ
-
            }
-
+            else
+            {
+                MessageBox.Show("You have not connected; Check your connection String.");
+            }
         }
         /// <summary>
         /// Initilizes the Program start
@@ -60,13 +53,6 @@ namespace IotData
         private void BtnInit_Click(object sender, EventArgs e)
         {
             // DataSchema ds = new DataSchema();
-
-            /// sooooo i believe we want to summon the background worker here
-            ///though i want to say the background worker will be living in its own seperate class
-            ///im going to guess thats what DBFileManip is about,
-            ///so im going to be treating dbfilemanp as its  a background worker with its sperarate methods
-
-
             dbManip.StartFileWorker();
         }
 
@@ -107,8 +93,6 @@ namespace IotData
         private void button5_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
-
-            
         }
 
 
