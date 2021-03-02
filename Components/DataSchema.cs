@@ -20,8 +20,8 @@ namespace IotData.Components
         /// </summary>
         /// <returns></returns>
         public string GetInformation()
-        {
-            return $"{DeviceName},{DeviceType},{TimeStamp:yyyyMMdd HH:mm:ss},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
+        {                                               //2021-03-02 12:42:40 AM
+            return $"{DeviceName},{DeviceType},{TimeStamp.ToString(System.Globalization.CultureInfo.InvariantCulture)},{UOM1},{UOM1Value},{UOM2},{UOM2Value} {Environment.NewLine}";
         }
 
         public DataSchema(string dName, DataInfo.DataType Type)
@@ -69,7 +69,7 @@ namespace IotData.Components
                     DeviceType = DataInfo.DataType.Gas;
                     break;
             }
-            TimeStamp = Convert.ToDateTime(vals[2]);
+            TimeStamp = DateTime.ParseExact(vals[2], "MM/dd/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
             UOM1 = vals[3];
             UOM1Value = Convert.ToDecimal(vals[4]);
             UOM2 = vals[5];
@@ -103,6 +103,8 @@ namespace IotData.Components
         internal void GenerateData( int UOMax1, int UOMax2, int upperLimit = 100000, int UOMin1 = 0, int UOMin2 = 0)
         {
             TimeStamp = DateTime.Now;
+            string tmp = TimeStamp.ToString();
+
             UOM1Value = decimal.Parse(DataInfo.rand.Next(UOMin1, UOMax1) + "." + DataInfo.rand.Next(0, upperLimit));
             UOM2Value = decimal.Parse(DataInfo.rand.Next(UOMin2, UOMax2) + "." + DataInfo.rand.Next(0, upperLimit));
         }

@@ -32,6 +32,12 @@ namespace IotData.Components
             ConfigurationManager.ConnectionStrings["labString"].ConnectionString,
             ConfigurationManager.ConnectionStrings["DockerStr"].ConnectionString
         };
+
+        /// <summary>
+        /// Used to determine if the database is online
+        /// </summary>
+        public static bool Connected { get; set; } = false;
+
         /// <summary>
         /// The number of threads avaliable for background workers
         /// </summary>

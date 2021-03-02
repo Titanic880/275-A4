@@ -54,32 +54,34 @@ namespace IotData.Components
                         using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
                             sw.WriteLine(DataInfo.OverflowQ.Dequeue().GetInformation());
                 }
-
-                //Checks that the database is offline
-                if (!DBChecker.Connected())
-                {
-                    //Writes a dataSchema to the file if the database is not found
-                    using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
-                        sw.WriteLine(DataInfo.InitialQueue.Dequeue().GetInformation());
-                }
-                //if the db is found then it shifts one line from the datafile into the db queue 
-                //(might change the size of the move depending on effeciency)
-                else
-                {
-                    using (StreamReader sr = new StreamReader(LocalDir + LocalFileName))
+                if (DataInfo.InitialQueue.Count != 0)
+                { 
+                    //Checks that the database is offline
+                    if (!DataInfo.Connected)
                     {
-                        string tmp = sr.ReadLine();
-                        if(tmp == null)
-                        {   //If the file is empty it will push a Schema from the inital to the Db Queue
-                            DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());
-                        }
-                        else
-                        {   //Otherwise it will pull from the file
-                            DataInfo.ToDatabaseQ.Enqueue(new DataSchema(tmp));
+                        //Writes a dataSchema to the file if the database is not found
+                        using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
+                            sw.WriteLine(DataInfo.InitialQueue.Dequeue().GetInformation());
+                    }
+                    //if the db is found then it shifts one line from the datafile into the db queue 
+                    //(might change the size of the move depending on effeciency)
+                    else
+                    {
+                        using (StreamReader sr = new StreamReader(LocalDir + LocalFileName))
+                        {
+                            string tmp = sr.ReadLine();
+                            if (tmp == null)
+                            {   //If the file is empty it will push a Schema from the inital to the Db Queue
+                                DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());
+                            }
+                            else
+                            {   //Otherwise it will pull from the file
+                                DataInfo.ToDatabaseQ.Enqueue(new DataSchema(tmp));
+                            }
                         }
                     }
+                    WriteTotal++;
                 }
-                WriteTotal++;
             }
         }
 

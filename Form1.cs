@@ -53,6 +53,8 @@ namespace IotData
         private void BtnInit_Click(object sender, EventArgs e)
         {
             // DataSchema ds = new DataSchema();
+            DataGen.Start();
+            LocalManip.Start();
             dbManip.Start();
         }
 

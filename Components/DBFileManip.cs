@@ -47,13 +47,16 @@ namespace IotData.Components
             //Checks for Cancel
             while (!wkr.CancellationPending)
             {
-                if(DBChecker.Connected() && DataInfo.ToDatabaseQ.Count != 0)
+                if(DataInfo.Connected && DataInfo.ToDatabaseQ.Count != 0)
                 {
                     //popping the first item off the database
                     string str = DataInfo.ToDatabaseQ.Dequeue().GetInformation();
                     //Inserts to Database -- if false then it adds it to the Queue for the File system
                     if (!InsertData(str))
+                    {
                         DataInfo.OverflowQ.Enqueue(new DataSchema(str));
+                        DataInfo.Connected = DBChecker.Connected();
+                    }
                 }
             }
             //todo
@@ -93,7 +96,7 @@ namespace IotData.Components
                 conn.Open();
                 cmd.ExecuteNonQuery();
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }
@@ -136,7 +139,7 @@ namespace IotData.Components
         {
             string createTableQuery = @"
                   CREATE TABLE [dbo].[Data](
-	[ID] [int] IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[ID] [decimal] IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[DeviceName] [nvarchar](50) NOT NULL,
 	[DeviceType] [nvarchar](50) NOT NULL,
 	[TimeStamp] [datetime] NOT NULL,
