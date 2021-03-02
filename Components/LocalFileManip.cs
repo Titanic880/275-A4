@@ -13,6 +13,8 @@ namespace IotData.Components
         readonly BackgroundWorker wkr = new BackgroundWorker();
         public bool Completed { get; private set; } = false;
         public ulong WriteTotal { get; private set; } = 0;
+
+        private uint FilePos = 0;
         public LocalFileManip()
         {
             wkr.DoWork += Wkr_DoWork;
@@ -45,6 +47,7 @@ namespace IotData.Components
 
         private void Wkr_DoWork(object sender, DoWorkEventArgs e)
         {
+            StreamReader sr = new StreamReader(LocalDir + LocalFileName);
             while (!wkr.CancellationPending)
             {
                 //Checks the overflow Queue
@@ -55,7 +58,7 @@ namespace IotData.Components
                             sw.WriteLine(DataInfo.OverflowQ.Dequeue().GetInformation());
                 }
                 if (DataInfo.InitialQueue.Count != 0)
-                { 
+                {
                     //Checks that the database is offline
                     if (!DataInfo.Connected)
                     {
@@ -67,17 +70,15 @@ namespace IotData.Components
                     //(might change the size of the move depending on effeciency)
                     else
                     {
-                        using (StreamReader sr = new StreamReader(LocalDir + LocalFileName))
-                        {
-                            string tmp = sr.ReadLine();
-                            if (tmp == null)
-                            {   //If the file is empty it will push a Schema from the inital to the Db Queue
-                                DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());
-                            }
-                            else
-                            {   //Otherwise it will pull from the file
-                                DataInfo.ToDatabaseQ.Enqueue(new DataSchema(tmp));
-                            }
+                        string tmp = sr.ReadLine();
+                        FilePos++;
+                        if (tmp == null || tmp == "")
+                        {   //If the file is empty it will push a Schema from the inital to the Db Queue
+                            DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());
+                        }
+                        else
+                        {   //Otherwise it will pull from the file
+                            DataInfo.ToDatabaseQ.Enqueue(new DataSchema(tmp));
                         }
                     }
                     WriteTotal++;
