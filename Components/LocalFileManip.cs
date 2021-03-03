@@ -71,7 +71,6 @@ namespace IotData.Components
                     else
                     {
                         string tmp = sr.ReadLine();
-                        FilePos++;
                         if (tmp == null || tmp == "")
                         {   //If the file is empty it will push a Schema from the inital to the Db Queue
                             DataInfo.ToDatabaseQ.Enqueue(DataInfo.InitialQueue.Dequeue());

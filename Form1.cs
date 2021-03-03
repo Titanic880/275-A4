@@ -103,16 +103,6 @@ namespace IotData
             {
                 MessageBox.Show("Local File Systems has Stopped!");
             }
-
-
-
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = dbManip.SelectAllFromDatabase();
-        }
-
-
     }
 }

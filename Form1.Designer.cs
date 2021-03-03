@@ -30,27 +30,16 @@ namespace IotData
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnInit = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.BtnGoOff = new System.Windows.Forms.Button();
             this.BtnGoOnline = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(583, 282);
-            this.dataGridView1.TabIndex = 0;
             // 
             // BtnInit
             // 
-            this.BtnInit.Location = new System.Drawing.Point(601, 12);
+            this.BtnInit.Location = new System.Drawing.Point(39, 22);
             this.BtnInit.Name = "BtnInit";
             this.BtnInit.Size = new System.Drawing.Size(107, 52);
             this.BtnInit.TabIndex = 1;
@@ -60,23 +49,13 @@ namespace IotData
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(601, 70);
+            this.BtnCancel.Location = new System.Drawing.Point(39, 80);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(107, 52);
             this.BtnCancel.TabIndex = 2;
             this.BtnCancel.Text = "Cancel";
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(601, 242);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(107, 52);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Test Online Mode (Data Grid View)";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // timer1
             // 
@@ -85,9 +64,9 @@ namespace IotData
             // 
             // BtnGoOff
             // 
-            this.BtnGoOff.Location = new System.Drawing.Point(601, 128);
+            this.BtnGoOff.Location = new System.Drawing.Point(152, 22);
             this.BtnGoOff.Name = "BtnGoOff";
-            this.BtnGoOff.Size = new System.Drawing.Size(107, 51);
+            this.BtnGoOff.Size = new System.Drawing.Size(107, 52);
             this.BtnGoOff.TabIndex = 6;
             this.BtnGoOff.Text = "Go Offline";
             this.BtnGoOff.UseVisualStyleBackColor = true;
@@ -95,9 +74,9 @@ namespace IotData
             // 
             // BtnGoOnline
             // 
-            this.BtnGoOnline.Location = new System.Drawing.Point(601, 185);
+            this.BtnGoOnline.Location = new System.Drawing.Point(152, 80);
             this.BtnGoOnline.Name = "BtnGoOnline";
-            this.BtnGoOnline.Size = new System.Drawing.Size(107, 51);
+            this.BtnGoOnline.Size = new System.Drawing.Size(107, 52);
             this.BtnGoOnline.TabIndex = 7;
             this.BtnGoOnline.Text = "Go Online";
             this.BtnGoOnline.UseVisualStyleBackColor = true;
@@ -107,27 +86,21 @@ namespace IotData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 303);
+            this.ClientSize = new System.Drawing.Size(300, 155);
             this.Controls.Add(this.BtnGoOnline);
             this.Controls.Add(this.BtnGoOff);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnInit);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "Generator";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button BtnInit;
         private System.Windows.Forms.Button BtnCancel;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button BtnGoOff;
         private System.Windows.Forms.Button BtnGoOnline;
