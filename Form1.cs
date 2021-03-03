@@ -24,7 +24,6 @@ namespace IotData
             BtnCancel.BackColor = Color.IndianRed;
             BtnGoOnline.BackColor = Color.CadetBlue;
             BtnGoOff.BackColor = Color.CadetBlue;
-            button5.BackColor = Color.CadetBlue;
             this.BackColor = Color.DarkSlateGray;
             Setup();
         }
