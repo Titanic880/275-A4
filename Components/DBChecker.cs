@@ -26,8 +26,8 @@ namespace IotData.Components
                 ConnectionType = 1;
             else
                 ConnectionType = -1;
-
-            conn = new SqlConnection(DataInfo.connections[ConnectionType]);
+            if(ConnectionType != -1)
+                conn = new SqlConnection(DataInfo.connections[ConnectionType]);
             return ConnectionType;
         }
 

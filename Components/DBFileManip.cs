@@ -15,8 +15,8 @@ namespace IotData.Components
     /// </summary>
     public class DBFileManip
     {
-        BackgroundWorker wkr = new BackgroundWorker();
-        private SqlConnection conn;
+        readonly BackgroundWorker wkr = new BackgroundWorker();
+        private readonly SqlConnection conn;
         public bool Completed { get; private set; } = false;
 
         public DBFileManip()

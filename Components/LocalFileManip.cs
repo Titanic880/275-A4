@@ -14,7 +14,6 @@ namespace IotData.Components
         public bool Completed { get; private set; } = false;
         public ulong WriteTotal { get; private set; } = 0;
 
-        private uint FilePos = 0;
         public LocalFileManip()
         {
             wkr.DoWork += Wkr_DoWork;

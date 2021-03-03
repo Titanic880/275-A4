@@ -7,7 +7,6 @@ namespace IotData
 {
     public partial class Form1 : Form
     {
-        bool cancel = false;
 
         /// <summary>
         /// Main instance of the DBFile Manip
