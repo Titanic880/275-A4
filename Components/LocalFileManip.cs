@@ -54,7 +54,10 @@ namespace IotData.Components
                 {
                     for (int i = 0; i < DataInfo.OverflowQ.Count; i++)
                         using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
+                        {
                             sw.WriteLine(DataInfo.OverflowQ.Dequeue().GetInformation());
+                            sw.Close();
+                        }
                 }
                 if (DataInfo.InitialQueue.Count != 0)
                 {
@@ -63,7 +66,10 @@ namespace IotData.Components
                     {
                         //Writes a dataSchema to the file if the database is not found
                         using (StreamWriter sw = new StreamWriter(LocalDir + LocalFileName))
+                        {
                             sw.WriteLine(DataInfo.InitialQueue.Dequeue().GetInformation());
+                            sw.Close();
+                        }
                     }
                     //if the db is found then it shifts one line from the datafile into the db queue 
                     //(might change the size of the move depending on effeciency)
