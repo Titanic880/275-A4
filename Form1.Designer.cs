@@ -45,7 +45,7 @@ namespace IotData
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(583, 341);
+            this.dataGridView1.Size = new System.Drawing.Size(583, 282);
             this.dataGridView1.TabIndex = 0;
             // 
             // BtnInit
@@ -54,7 +54,7 @@ namespace IotData
             this.BtnInit.Name = "BtnInit";
             this.BtnInit.Size = new System.Drawing.Size(107, 52);
             this.BtnInit.TabIndex = 1;
-            this.BtnInit.Text = "Generate Data";
+            this.BtnInit.Text = "Generate Data (START)";
             this.BtnInit.UseVisualStyleBackColor = true;
             this.BtnInit.Click += new System.EventHandler(this.BtnInit_Click);
             // 
@@ -74,7 +74,7 @@ namespace IotData
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(107, 52);
             this.button5.TabIndex = 5;
-            this.button5.Text = "Test Online Mode";
+            this.button5.Text = "Test Online Mode (Data Grid View)";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -107,7 +107,7 @@ namespace IotData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 362);
+            this.ClientSize = new System.Drawing.Size(716, 303);
             this.Controls.Add(this.BtnGoOnline);
             this.Controls.Add(this.BtnGoOff);
             this.Controls.Add(this.button5);

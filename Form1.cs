@@ -1,6 +1,7 @@
 ﻿using System;
 using IotData.Components;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace IotData
 {
@@ -19,7 +20,12 @@ namespace IotData
         {
             InitializeComponent();
             this.MaximizeBox = false;
-
+            BtnInit.BackColor = Color.MediumSpringGreen;
+            BtnCancel.BackColor = Color.IndianRed;
+            BtnGoOnline.BackColor = Color.CadetBlue;
+            BtnGoOff.BackColor = Color.CadetBlue;
+            button5.BackColor = Color.CadetBlue;
+            this.BackColor = Color.DarkSlateGray;
             Setup();
         }
 
@@ -42,8 +48,9 @@ namespace IotData
             }
             else
             {
-                MessageBox.Show("You have not connected; Check your connection String.");
+                MessageBox.Show("You have not connected, check your connection string!.");
             }
+            
         }
         /// <summary>
         /// Initilizes the Program start
@@ -61,7 +68,7 @@ namespace IotData
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            //finished
+            //finished!
             DataGen.Stop();
             LocalManip.Stop();
             dbManip.Stop();
@@ -70,14 +77,14 @@ namespace IotData
 
         private void BtnGoOff_Click(object sender, EventArgs e)
         {
-            //finished
+            //finished!
             DBChecker.DEBUG_SETOFFLINE();
             MessageBox.Show("Database is going offline! :)");
         }
 
         private void BtnGoOnline_Click(object sender, EventArgs e)
         {
-            //finished
+            //finished!
             DBChecker.DEBUG_SETONLINE();
             MessageBox.Show("Database is coming online! :)");
         }
